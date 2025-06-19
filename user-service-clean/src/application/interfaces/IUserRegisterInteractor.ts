@@ -1,7 +1,8 @@
+import {
+  RegisterUserRequestDTO,
+  RegisterUserResponseDTO,
+} from "../dtos/userRegisterDTO";
+
 export interface IUserRegisterInteractor {
-  execute(input: {
-    name: string;
-    email: string;
-    password: string;
-  }): Promise<any>;
+  execute(input: RegisterUserRequestDTO): Promise<RegisterUserResponseDTO>;
 }

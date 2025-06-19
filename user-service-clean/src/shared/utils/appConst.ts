@@ -6,4 +6,7 @@ export const INTERFACE_TYPE = {
   TokenManager: Symbol.for("TokenManager"),
   PasswordManager: Symbol.for("PasswordManager"),
   UserModel: Symbol.for("UserModel"),
+  SendOtpInteractor: Symbol.for("SendOtpInteractor"),
+  OtpService: Symbol.for("OtpService"),
+  MailService: Symbol.for("MailService"),
 };

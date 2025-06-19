@@ -3,20 +3,25 @@ import { inject, injectable } from "inversify";
 import { INTERFACE_TYPE } from "../../../shared/utils/appConst";
 import { IUserRegisterInteractor } from "../../../application/interfaces/IUserRegisterInteractor";
 import { RegisterUserResponseDTO } from "../../../application/dtos/userRegisterDTO";
+import { ISendOtpInteractor } from "../../../application/interfaces/ISendOtpInteractor";
 
 @injectable()
 export class UserRegisterController {
-  private interactor: IUserRegisterInteractor;
+  private registerInteractor: IUserRegisterInteractor;
+  private sendOtpInteractor: ISendOtpInteractor;
 
   constructor(
     @inject(INTERFACE_TYPE.UserRegisterInteractor)
-    interactor: IUserRegisterInteractor
+    registerInteractor: IUserRegisterInteractor,
+    @inject(INTERFACE_TYPE.SendOtpInteractor)
+    sendOtpInteractor: ISendOtpInteractor
   ) {
-    this.interactor = interactor;
+    this.registerInteractor = registerInteractor;
+    this.sendOtpInteractor = sendOtpInteractor;
   }
 
   async onEmailRegister(req: Request, res: Response) {
-    const data: RegisterUserResponseDTO = await this.interactor.execute(
+    const data: RegisterUserResponseDTO = await this.registerInteractor.execute(
       req.body
     );
     const { refreshToken } = data;
@@ -33,5 +38,10 @@ export class UserRegisterController {
       message: "User registered successfully",
       data,
     });
+  }
+
+  async onSendOtp(req: Request, res: Response) {
+    const otp = await this.sendOtpInteractor.execute(req.body);
+    res.status(200).json(otp);
   }
 }
