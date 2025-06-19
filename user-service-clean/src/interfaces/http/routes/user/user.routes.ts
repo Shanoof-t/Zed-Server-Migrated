@@ -30,4 +30,9 @@ router.post(
   catchAsyncMethod(controller.onAccessTokenGenerator.bind(controller))
 );
 
+router.post(
+  "/reset-otp-request",
+  catchAsyncMethod(controller.onSendResetOtp.bind(controller))
+);
+
 export default router;

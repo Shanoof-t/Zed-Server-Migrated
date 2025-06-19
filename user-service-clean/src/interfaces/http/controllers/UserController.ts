@@ -6,6 +6,7 @@ import { RegisterUserResponseDTO } from "../../../application/dtos/userRegisterD
 import { ISendOtpInteractor } from "../../../application/interfaces/ISendOtpInteractor";
 import { IUserSignInInteractor } from "../../../application/interfaces/IUserSignInInteractor";
 import { IAccessTokenGeneratorInteractor } from "../../../application/interfaces/IAccessTokenGeneratorInteractor";
+import { ISendResendOtpInteractor } from "../../../application/interfaces/IResendOtpInteractor";
 
 @injectable()
 export class UserRegisterController {
@@ -13,7 +14,7 @@ export class UserRegisterController {
   private sendOtpInteractor: ISendOtpInteractor;
   private signInInteractor: IUserSignInInteractor;
   private accessTokenGeneratorInteractor: IAccessTokenGeneratorInteractor;
-
+  private sendResendOtpInteractor: ISendResendOtpInteractor;
   constructor(
     @inject(INTERFACE_TYPE.UserRegisterInteractor)
     registerInteractor: IUserRegisterInteractor,
@@ -22,12 +23,15 @@ export class UserRegisterController {
     @inject(INTERFACE_TYPE.UserSignInInteractor)
     signInInteractor: IUserSignInInteractor,
     @inject(INTERFACE_TYPE.AccessTokenGeneratorInteractor)
-    accessTokenGeneratorInteractor: IAccessTokenGeneratorInteractor
+    accessTokenGeneratorInteractor: IAccessTokenGeneratorInteractor,
+    @inject(INTERFACE_TYPE.SendResendOtpInteractor)
+    sendResendOtpInteractor: ISendResendOtpInteractor
   ) {
     this.registerInteractor = registerInteractor;
     this.sendOtpInteractor = sendOtpInteractor;
     this.signInInteractor = signInInteractor;
     this.accessTokenGeneratorInteractor = accessTokenGeneratorInteractor;
+    this.sendResendOtpInteractor = sendResendOtpInteractor;
   }
 
   async onEmailRegister(req: Request, res: Response) {
@@ -78,7 +82,10 @@ export class UserRegisterController {
     res.status(200).json(accessToken);
   }
 
-  async onSendResetOtp(req: Request, res: Response) {}
+  async onSendResetOtp(req: Request, res: Response) {
+    const otp = await this.sendResendOtpInteractor.execute(req.body);
+    res.status(200).json(otp);
+  }
 
   async onResetPassword(req: Request, res: Response) {}
 

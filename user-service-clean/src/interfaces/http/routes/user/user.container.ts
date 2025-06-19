@@ -1,5 +1,3 @@
-// src/interfaces/http/routes/user/user.container.ts
-
 import { Container } from "inversify";
 import { Model } from "mongoose";
 import UserModel from "../../../../infrasrtucture/database/model/userModel";
@@ -24,6 +22,10 @@ import { IMailService } from "../../../../domain/services/IMailService";
 import { MailService } from "../../../../infrasrtucture/services/MailService";
 import { IUserSignInInteractor } from "../../../../application/interfaces/IUserSignInInteractor";
 import { UserSignInInteractor } from "../../../../application/interactors/UserSignInInteractor";
+import { IAccessTokenGeneratorInteractor } from "../../../../application/interfaces/IAccessTokenGeneratorInteractor";
+import { accessTokenGeneratorInteractor } from "../../../../application/interactors/accessTokenGeneratorInteractor";
+import { IResendOtpInteractor } from "../../../../application/interfaces/IResendOtpInteractor";
+import { ResendOtpInteractor } from "../../../../application/interactors/SendResendOtpInteractor";
 
 export const userContainer = new Container();
 
@@ -61,6 +63,16 @@ userContainer
 userContainer
   .bind<IUserSignInInteractor>(INTERFACE_TYPE.UserSignInInteractor)
   .to(UserSignInInteractor);
+
+userContainer
+  .bind<IAccessTokenGeneratorInteractor>(
+    INTERFACE_TYPE.AccessTokenGeneratorInteractor
+  )
+  .to(accessTokenGeneratorInteractor);
+
+userContainer
+  .bind<IResendOtpInteractor>(INTERFACE_TYPE.ResendOtpInteractor)
+  .to(ResendOtpInteractor);
 
 userContainer.bind<IOtpService>(INTERFACE_TYPE.OtpService).to(OtpService);
 

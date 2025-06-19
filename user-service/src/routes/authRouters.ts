@@ -3,9 +3,9 @@ import { accessTokenGenerator, emailRegister, emailSignIn, githubAuth, googleAut
 
 const authRouter :Router = express.Router();
 
-authRouter.post('/otp-request',sendOtp);
-authRouter.post('/register',emailRegister);
-authRouter.post('/signin',emailSignIn);
+authRouter.post('/otp-request',sendOtp);//done
+authRouter.post('/register',emailRegister);//done
+authRouter.post('/signin',emailSignIn);//done
 authRouter.post('/get-access-token',accessTokenGenerator);
 authRouter.post('/reset-otp-request',sendResetOtp);
 authRouter.post('/reset-password',resetPassword);
