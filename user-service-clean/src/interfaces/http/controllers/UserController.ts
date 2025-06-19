@@ -8,6 +8,7 @@ import { IUserSignInInteractor } from "../../../application/interfaces/IUserSign
 import { IAccessTokenGeneratorInteractor } from "../../../application/interfaces/IAccessTokenGeneratorInteractor";
 import { IResendOtpInteractor } from "../../../application/interfaces/IResendOtpInteractor";
 import { IResetPasswordInteractor } from "../../../application/interfaces/IResetPasswordInteractor";
+import { IGoogleAuthInteractor } from "../../../application/interfaces/IGoogleAuthInteractor";
 
 @injectable()
 export class UserRegisterController {
@@ -17,6 +18,7 @@ export class UserRegisterController {
   private accessTokenGeneratorInteractor: IAccessTokenGeneratorInteractor;
   private sendResendOtpInteractor: IResendOtpInteractor;
   private resetPasswordInteractor: IResetPasswordInteractor;
+  private googleAuthInteractor: IGoogleAuthInteractor;
 
   constructor(
     @inject(INTERFACE_TYPE.UserRegisterInteractor)
@@ -30,7 +32,9 @@ export class UserRegisterController {
     @inject(INTERFACE_TYPE.ResendOtpInteractor)
     sendResendOtpInteractor: IResendOtpInteractor,
     @inject(INTERFACE_TYPE.ResetPasswordInteractor)
-    resetPasswordInteractor: IResetPasswordInteractor
+    resetPasswordInteractor: IResetPasswordInteractor,
+    @inject(INTERFACE_TYPE.GoogleAuthInteractor)
+    googleAuthInteractor: IGoogleAuthInteractor
   ) {
     this.registerInteractor = registerInteractor;
     this.sendOtpInteractor = sendOtpInteractor;
@@ -38,6 +42,7 @@ export class UserRegisterController {
     this.accessTokenGeneratorInteractor = accessTokenGeneratorInteractor;
     this.sendResendOtpInteractor = sendResendOtpInteractor;
     this.resetPasswordInteractor = resetPasswordInteractor;
+    this.googleAuthInteractor = googleAuthInteractor;
   }
 
   async onEmailRegister(req: Request, res: Response) {
@@ -98,7 +103,21 @@ export class UserRegisterController {
     res.status(200).json({ message: "Rest Password Sucessfull, Login Now" });
   }
 
-  async onGoogleAuth(req: Request, res: Response) {}
+  async onGoogleAuth(req: Request, res: Response) {
+    const { credentialResponse } = req.body;
+    const userData = await this.googleAuthInteractor.execute(
+      credentialResponse
+    );
+
+    res.cookie("refreshToken", userData.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.status(200).json(userData);
+  }
 
   async onGithubAuth(req: Request, res: Response) {}
 }

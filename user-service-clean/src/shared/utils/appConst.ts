@@ -13,4 +13,6 @@ export const INTERFACE_TYPE = {
   AccessTokenGeneratorInteractor: Symbol.for("AccessTokenGeneratorInteractor"),
   ResendOtpInteractor: Symbol.for("ResendOtpInteractor"),
   ResetPasswordInteractor: Symbol.for("ResetPasswordInteractor"),
+  GoogleAuthInteractor: Symbol.for("GoogleAuthInteractor"),
+  GoogleService: Symbol.for("GoogleService"),
 };

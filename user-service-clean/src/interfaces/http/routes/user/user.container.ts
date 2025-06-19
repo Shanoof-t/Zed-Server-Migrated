@@ -28,6 +28,10 @@ import { ResendOtpInteractor } from "../../../../application/interactors/SendRes
 import { IResetPasswordInteractor } from "../../../../application/interfaces/IResetPasswordInteractor";
 import { ResetPasswordInteractor } from "../../../../application/interactors/ResetPasswordInteractor";
 import { IResendOtpInteractor } from "../../../../application/interfaces/IResendOtpInteractor";
+import { GoogleAuthInteractor } from "../../../../application/interactors/GoogleAuthInteractor";
+import { IGoogleAuthInteractor } from "../../../../application/interfaces/IGoogleAuthInteractor";
+import { IGoogleService } from "../../../../domain/services/IGoogleService";
+import { GoogleService } from "../../../../infrasrtucture/services/GoogleService";
 
 export const userContainer = new Container();
 
@@ -80,6 +84,14 @@ userContainer
   .bind<IResetPasswordInteractor>(INTERFACE_TYPE.ResetPasswordInteractor)
   .to(ResetPasswordInteractor);
 
+userContainer
+  .bind<IGoogleAuthInteractor>(INTERFACE_TYPE.GoogleAuthInteractor)
+  .to(GoogleAuthInteractor);
+
 userContainer.bind<IOtpService>(INTERFACE_TYPE.OtpService).to(OtpService);
 
 userContainer.bind<IMailService>(INTERFACE_TYPE.MailService).to(MailService);
+
+userContainer
+  .bind<IGoogleService>(INTERFACE_TYPE.GoogleService)
+  .to(GoogleService);

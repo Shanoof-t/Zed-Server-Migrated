@@ -9,4 +9,5 @@ export default {
   APP_PASSWORD: process.env.APP_PASSWORD as string,
   JWT_SECRET_KEY: process.env.JWT_SECRET_KEY as string,
   FRONTEND_URL: process.env.FRONTEND_URL as string,
+  GOOGLE_CLIENT_ID: process.env.FRONTEND_URL as string,
 };

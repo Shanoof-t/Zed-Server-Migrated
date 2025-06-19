@@ -11,12 +11,27 @@ export class UserRepository implements IUserRepository {
     this.db = model;
   }
   async create(data: User): Promise<User> {
-    const { name, email, password, profileImg } = data;
+    const {
+      name,
+      email,
+      password,
+      profileImg,
+      bannerImg,
+      bio,
+      gitHubId,
+      googleId,
+      servers,
+    } = data;
     const user = await this.db.create({
       name,
       email,
       profileImg,
       password,
+      bannerImg,
+      bio,
+      gitHubId,
+      googleId,
+      servers,
     });
 
     if (!user) throw new CustomError("User not created !", 400);

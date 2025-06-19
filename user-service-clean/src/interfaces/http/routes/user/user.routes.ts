@@ -40,4 +40,9 @@ router.post(
   catchAsyncMethod(controller.onResetPassword.bind(controller))
 );
 
+router.post(
+  "/auth/google",
+  catchAsyncMethod(controller.onGoogleAuth.bind(controller))
+);
+
 export default router;

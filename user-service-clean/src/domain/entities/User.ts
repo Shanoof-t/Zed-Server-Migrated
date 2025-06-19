@@ -2,7 +2,7 @@ export class User {
   constructor(
     public readonly name: string,
     public readonly email: string,
-    public readonly password: string,
+    public readonly password?: string,
     public profileImg?: string,
     public readonly bio?: string,
     public readonly bannerImg?: string,
@@ -12,7 +12,7 @@ export class User {
     public readonly servers?: string
   ) {}
 
-  static generateDefaultAvatar(name:string) {
+  static generateDefaultAvatar(name: string) {
     return `https://ui-avatars.com/api/?name=${name.charAt(0)}&random`;
   }
 
