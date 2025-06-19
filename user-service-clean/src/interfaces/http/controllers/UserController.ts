@@ -6,7 +6,8 @@ import { RegisterUserResponseDTO } from "../../../application/dtos/userRegisterD
 import { ISendOtpInteractor } from "../../../application/interfaces/ISendOtpInteractor";
 import { IUserSignInInteractor } from "../../../application/interfaces/IUserSignInInteractor";
 import { IAccessTokenGeneratorInteractor } from "../../../application/interfaces/IAccessTokenGeneratorInteractor";
-import { ISendResendOtpInteractor } from "../../../application/interfaces/IResendOtpInteractor";
+import { IResendOtpInteractor } from "../../../application/interfaces/IResendOtpInteractor";
+import { IResetPasswordInteractor } from "../../../application/interfaces/IResetPasswordInteractor";
 
 @injectable()
 export class UserRegisterController {
@@ -14,7 +15,9 @@ export class UserRegisterController {
   private sendOtpInteractor: ISendOtpInteractor;
   private signInInteractor: IUserSignInInteractor;
   private accessTokenGeneratorInteractor: IAccessTokenGeneratorInteractor;
-  private sendResendOtpInteractor: ISendResendOtpInteractor;
+  private sendResendOtpInteractor: IResendOtpInteractor;
+  private resetPasswordInteractor: IResetPasswordInteractor;
+
   constructor(
     @inject(INTERFACE_TYPE.UserRegisterInteractor)
     registerInteractor: IUserRegisterInteractor,
@@ -24,14 +27,17 @@ export class UserRegisterController {
     signInInteractor: IUserSignInInteractor,
     @inject(INTERFACE_TYPE.AccessTokenGeneratorInteractor)
     accessTokenGeneratorInteractor: IAccessTokenGeneratorInteractor,
-    @inject(INTERFACE_TYPE.SendResendOtpInteractor)
-    sendResendOtpInteractor: ISendResendOtpInteractor
+    @inject(INTERFACE_TYPE.ResendOtpInteractor)
+    sendResendOtpInteractor: IResendOtpInteractor,
+    @inject(INTERFACE_TYPE.ResetPasswordInteractor)
+    resetPasswordInteractor: IResetPasswordInteractor
   ) {
     this.registerInteractor = registerInteractor;
     this.sendOtpInteractor = sendOtpInteractor;
     this.signInInteractor = signInInteractor;
     this.accessTokenGeneratorInteractor = accessTokenGeneratorInteractor;
     this.sendResendOtpInteractor = sendResendOtpInteractor;
+    this.resetPasswordInteractor = resetPasswordInteractor;
   }
 
   async onEmailRegister(req: Request, res: Response) {
@@ -87,7 +93,10 @@ export class UserRegisterController {
     res.status(200).json(otp);
   }
 
-  async onResetPassword(req: Request, res: Response) {}
+  async onResetPassword(req: Request, res: Response) {
+    await this.resetPasswordInteractor.execute(req.body);
+    res.status(200).json({ message: "Rest Password Sucessfull, Login Now" });
+  }
 
   async onGoogleAuth(req: Request, res: Response) {}
 

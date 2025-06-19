@@ -35,4 +35,9 @@ router.post(
   catchAsyncMethod(controller.onSendResetOtp.bind(controller))
 );
 
+router.post(
+  "/reset-password",
+  catchAsyncMethod(controller.onResetPassword.bind(controller))
+);
+
 export default router;

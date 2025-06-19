@@ -6,8 +6,8 @@ const authRouter :Router = express.Router();
 authRouter.post('/otp-request',sendOtp);//done
 authRouter.post('/register',emailRegister);//done
 authRouter.post('/signin',emailSignIn);//done
-authRouter.post('/get-access-token',accessTokenGenerator);
-authRouter.post('/reset-otp-request',sendResetOtp);
+authRouter.post('/get-access-token',accessTokenGenerator);//done
+authRouter.post('/reset-otp-request',sendResetOtp);//done
 authRouter.post('/reset-password',resetPassword);
 authRouter.post('/auth/google',googleAuth);
 authRouter.post('/auth/github/callback',githubAuth);

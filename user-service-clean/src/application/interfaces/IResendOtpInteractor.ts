@@ -3,6 +3,6 @@ import {
   sendResetOtpResponseDTO,
 } from "../dtos/resendOtpDTO";
 
-export interface ISendResendOtpInteractor {
+export interface IResendOtpInteractor {
   execute(body: sendResetOtpRequestDTO): Promise<sendResetOtpResponseDTO>;
 }

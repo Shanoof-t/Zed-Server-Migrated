@@ -24,8 +24,10 @@ import { IUserSignInInteractor } from "../../../../application/interfaces/IUserS
 import { UserSignInInteractor } from "../../../../application/interactors/UserSignInInteractor";
 import { IAccessTokenGeneratorInteractor } from "../../../../application/interfaces/IAccessTokenGeneratorInteractor";
 import { accessTokenGeneratorInteractor } from "../../../../application/interactors/accessTokenGeneratorInteractor";
-import { IResendOtpInteractor } from "../../../../application/interfaces/IResendOtpInteractor";
 import { ResendOtpInteractor } from "../../../../application/interactors/SendResendOtpInteractor";
+import { IResetPasswordInteractor } from "../../../../application/interfaces/IResetPasswordInteractor";
+import { ResetPasswordInteractor } from "../../../../application/interactors/ResetPasswordInteractor";
+import { IResendOtpInteractor } from "../../../../application/interfaces/IResendOtpInteractor";
 
 export const userContainer = new Container();
 
@@ -73,6 +75,10 @@ userContainer
 userContainer
   .bind<IResendOtpInteractor>(INTERFACE_TYPE.ResendOtpInteractor)
   .to(ResendOtpInteractor);
+
+userContainer
+  .bind<IResetPasswordInteractor>(INTERFACE_TYPE.ResetPasswordInteractor)
+  .to(ResetPasswordInteractor);
 
 userContainer.bind<IOtpService>(INTERFACE_TYPE.OtpService).to(OtpService);
 
