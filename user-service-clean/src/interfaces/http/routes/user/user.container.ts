@@ -6,7 +6,7 @@ import UserModel from "../../../../infrasrtucture/database/model/userModel";
 import { IUserRepository } from "../../../../domain/repositories/IUserRepository";
 import { UserRepository } from "../../../../infrasrtucture/implementations/UserRepository";
 import { IUserRegisterInteractor } from "../../../../application/interfaces/IUserRegisterInteractor";
-import { UserRegisterInteractor } from "../../../../application/interactors/userRegisterInteractor";
+import { UserRegisterInteractor } from "../../../../application/interactors/UserRegisterInteractor";
 import { IHasherEngine } from "../../../../infrasrtucture/crypto/IHasherEngine";
 import { BcryptEngine } from "../../../../infrasrtucture/crypto/BcryptEngine";
 import { ITokenManager } from "../../../../infrasrtucture/security/token/ITokenManager";
@@ -17,11 +17,13 @@ import { UserRegisterController } from "../../controllers/UserController";
 import { INTERFACE_TYPE } from "../../../../shared/utils/appConst";
 import { User } from "../../../../domain/entities/User";
 import { ISendOtpInteractor } from "../../../../application/interfaces/ISendOtpInteractor";
-import { SendOtpInteractor } from "../../../../application/interactors/sendOtpInteractor";
+import { SendOtpInteractor } from "../../../../application/interactors/SendOtpInteractor";
 import { IOtpService } from "../../../../domain/services/IOtpService";
 import { OtpService } from "../../../../infrasrtucture/services/OtpService";
 import { IMailService } from "../../../../domain/services/IMailService";
 import { MailService } from "../../../../infrasrtucture/services/MailService";
+import { IUserSignInInteractor } from "../../../../application/interfaces/IUserSignInInteractor";
+import { UserSignInInteractor } from "../../../../application/interactors/UserSignInInteractor";
 
 export const userContainer = new Container();
 
@@ -55,6 +57,10 @@ userContainer
 userContainer
   .bind<ISendOtpInteractor>(INTERFACE_TYPE.SendOtpInteractor)
   .to(SendOtpInteractor);
+
+userContainer
+  .bind<IUserSignInInteractor>(INTERFACE_TYPE.UserSignInInteractor)
+  .to(UserSignInInteractor);
 
 userContainer.bind<IOtpService>(INTERFACE_TYPE.OtpService).to(OtpService);
 

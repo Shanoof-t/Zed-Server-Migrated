@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
-import { IHasherEngine } from "../../crypto/IHasherEngine"; 
+import { IHasherEngine } from "../../crypto/IHasherEngine";
 import { IPasswordManager } from "./IPasswordManager";
-import { INTERFACE_TYPE } from "../../../shared/utils/appConst"; 
+import { INTERFACE_TYPE } from "../../../shared/utils/appConst";
 
 @injectable()
 export class passwordManager implements IPasswordManager {
@@ -11,5 +11,8 @@ export class passwordManager implements IPasswordManager {
   }
   async hash(password: string): Promise<string> {
     return await this.hasher.hash(password, 10);
+  }
+  async compare(data: string | Buffer, encrypted: string): Promise<boolean> {
+    return await this.hasher.compare(data, encrypted);
   }
 }

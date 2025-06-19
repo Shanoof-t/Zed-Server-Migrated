@@ -9,4 +9,5 @@ export const INTERFACE_TYPE = {
   SendOtpInteractor: Symbol.for("SendOtpInteractor"),
   OtpService: Symbol.for("OtpService"),
   MailService: Symbol.for("MailService"),
+  UserSignInInteractor: Symbol.for("UserSignInInteractor"),
 };

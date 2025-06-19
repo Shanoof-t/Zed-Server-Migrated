@@ -20,4 +20,9 @@ router.post(
   catchAsyncMethod(controller.onEmailRegister.bind(controller))
 );
 
+router.post(
+  "/signin",
+  catchAsyncMethod(controller.onEmailSignIn.bind(controller))
+);
+
 export default router;
