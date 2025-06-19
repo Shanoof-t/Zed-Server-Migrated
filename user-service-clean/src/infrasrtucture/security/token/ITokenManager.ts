@@ -5,5 +5,4 @@ export interface ITokenManager {
   generateRefreshToken(user: User): string;
   verifyAccessToken(token: string): User;
   verifyRefreshToken(token: string): User;
-  // sendRefreshToken(response: Response, refreshToken: string): void;
 }

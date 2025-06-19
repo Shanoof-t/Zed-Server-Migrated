@@ -25,4 +25,9 @@ router.post(
   catchAsyncMethod(controller.onEmailSignIn.bind(controller))
 );
 
+router.post(
+  "/get-access-token",
+  catchAsyncMethod(controller.onAccessTokenGenerator.bind(controller))
+);
+
 export default router;
