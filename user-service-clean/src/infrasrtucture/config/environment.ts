@@ -10,4 +10,6 @@ export default {
   JWT_SECRET_KEY: process.env.JWT_SECRET_KEY as string,
   FRONTEND_URL: process.env.FRONTEND_URL as string,
   GOOGLE_CLIENT_ID: process.env.FRONTEND_URL as string,
+  GITHUB_CLIENT_ID: process.env.FRONTEND_URL as string,
+  GITHUB_CLIENT_SECRET: process.env.FRONTEND_URL as string,
 };

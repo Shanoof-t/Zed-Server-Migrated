@@ -9,9 +9,10 @@ import { IAccessTokenGeneratorInteractor } from "../../../application/interfaces
 import { IResendOtpInteractor } from "../../../application/interfaces/IResendOtpInteractor";
 import { IResetPasswordInteractor } from "../../../application/interfaces/IResetPasswordInteractor";
 import { IGoogleAuthInteractor } from "../../../application/interfaces/IGoogleAuthInteractor";
+import { IGithubAuthInteractor } from "../../../application/interfaces/IGithubAuthInteractor";
 
 @injectable()
-export class UserRegisterController {
+export class AuthController {
   private registerInteractor: IUserRegisterInteractor;
   private sendOtpInteractor: ISendOtpInteractor;
   private signInInteractor: IUserSignInInteractor;
@@ -19,6 +20,7 @@ export class UserRegisterController {
   private sendResendOtpInteractor: IResendOtpInteractor;
   private resetPasswordInteractor: IResetPasswordInteractor;
   private googleAuthInteractor: IGoogleAuthInteractor;
+  private githubAuthInteractor: IGithubAuthInteractor;
 
   constructor(
     @inject(INTERFACE_TYPE.UserRegisterInteractor)
@@ -34,7 +36,9 @@ export class UserRegisterController {
     @inject(INTERFACE_TYPE.ResetPasswordInteractor)
     resetPasswordInteractor: IResetPasswordInteractor,
     @inject(INTERFACE_TYPE.GoogleAuthInteractor)
-    googleAuthInteractor: IGoogleAuthInteractor
+    googleAuthInteractor: IGoogleAuthInteractor,
+    @inject(INTERFACE_TYPE.GithubAuthInteractor)
+    githubAuthInteractor: IGithubAuthInteractor
   ) {
     this.registerInteractor = registerInteractor;
     this.sendOtpInteractor = sendOtpInteractor;
@@ -43,6 +47,7 @@ export class UserRegisterController {
     this.sendResendOtpInteractor = sendResendOtpInteractor;
     this.resetPasswordInteractor = resetPasswordInteractor;
     this.googleAuthInteractor = googleAuthInteractor;
+    this.githubAuthInteractor = githubAuthInteractor;
   }
 
   async onEmailRegister(req: Request, res: Response) {
@@ -119,5 +124,17 @@ export class UserRegisterController {
     res.status(200).json(userData);
   }
 
-  async onGithubAuth(req: Request, res: Response) {}
+  async onGithubAuth(req: Request, res: Response) {
+    const { code } = req.body;
+    const userData = await this.githubAuthInteractor.execute({ code });
+
+    res.cookie("refreshToken", userData.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.status(200).json(userData);
+  }
 }

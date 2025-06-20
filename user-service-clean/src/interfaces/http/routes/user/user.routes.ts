@@ -1,13 +1,13 @@
 import express from "express";
 import { userContainer } from "./user.container";
 import { INTERFACE_TYPE } from "../../../../shared/utils/appConst";
-import { UserRegisterController } from "../../controllers/UserController";
+import { AuthController } from "../../controllers/AuthController";
 import { catchAsyncMethod } from "../../../../shared/utils/catchAsynMethod";
 
 const router = express.Router();
 
-const controller = userContainer.get<UserRegisterController>(
-  INTERFACE_TYPE.UserRegisterController
+const controller = userContainer.get<AuthController>(
+  INTERFACE_TYPE.AuthController
 );
 
 router.post(
@@ -43,6 +43,11 @@ router.post(
 router.post(
   "/auth/google",
   catchAsyncMethod(controller.onGoogleAuth.bind(controller))
+);
+
+router.post(
+  "/auth/github/callback",
+  catchAsyncMethod(controller.onGithubAuth.bind(controller))
 );
 
 export default router;
