@@ -3,14 +3,14 @@ import {
   sendResetOtpRequestDTO,
   sendResetOtpResponseDTO,
 } from "../dtos/resendOtpDTO";
-import { ISendResendOtpInteractor } from "../interfaces/IResendOtpInteractor";
+import { IResendOtpInteractor } from "../interfaces/IResendOtpInteractor";
 import { INTERFACE_TYPE } from "../../shared/utils/appConst";
 import { IUserRepository } from "../../domain/repositories/IUserRepository";
 import CustomError from "../../shared/utils/CustomError";
 import { IOtpService } from "../../domain/services/IOtpService";
 import { IMailService } from "../../domain/services/IMailService";
 
-export class ResendOtpInteractor implements ISendResendOtpInteractor {
+export class ResendOtpInteractor implements IResendOtpInteractor {
   private repository: IUserRepository;
   private otpService: IOtpService;
   private mailService: IMailService;

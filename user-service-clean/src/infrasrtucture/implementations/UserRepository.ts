@@ -43,4 +43,19 @@ export class UserRepository implements IUserRepository {
     if (!user) throw new CustomError("User not created !", 400);
     return user;
   }
+  async findById(id: string): Promise<User> {
+    const user = await this.db.findById(id).select("-password");
+    if (!user) throw new CustomError("User not created !", 400);
+    return user;
+  }
+  async findByName(name: string): Promise<User> {
+    const user = await this.db.findById({ name }).select("-password");
+    if (!user) throw new CustomError("User not created !", 400);
+    return user;
+  }
+
+  async find(userIds: string[]): Promise<User[]> {
+    const users = await this.db.find({ _id: { $in: userIds } });
+    return users;
+  }
 }

@@ -1,7 +1,9 @@
 export const INTERFACE_TYPE = {
+  AuthController: Symbol.for("AuthController"),
+  ProfileController: Symbol.for("ProfileController"),
+  UserController: Symbol.for("UserController"),
   UserRepository: Symbol.for("UserRepository"),
   UserRegisterInteractor: Symbol.for("UserRegisterInteractor"),
-  AuthController: Symbol.for("AuthController"),
   BcryptEngine: Symbol.for("BcryptEngine"),
   TokenManager: Symbol.for("TokenManager"),
   PasswordManager: Symbol.for("PasswordManager"),
@@ -17,4 +19,7 @@ export const INTERFACE_TYPE = {
   GoogleService: Symbol.for("GoogleService"),
   GithubAuthInteractor: Symbol.for("GithubAuthInteractor"),
   GithubService: Symbol.for("GithubService"),
+  GetProfileInteractor: Symbol.for("GetProfileInteractor"),
+  UpdateProfileInteractor: Symbol.for("UpdateProfileInteractor"),
+  GetBulkUsersInteractor: Symbol.for("GetBulkUsersInteractor"),
 };
