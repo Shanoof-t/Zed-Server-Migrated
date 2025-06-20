@@ -1,4 +1,4 @@
-import { inject } from "inversify";
+import { inject, injectable } from "inversify";
 import {
   getProfileRequestDTO,
   getProfileResponseDTO,
@@ -7,6 +7,7 @@ import { IGetProfileInteractor } from "../interfaces/IGetProfileInteractor";
 import { INTERFACE_TYPE } from "../../shared/utils/appConst";
 import { IUserRepository } from "../../domain/repositories/IUserRepository";
 
+@injectable()
 export class GetProfileInteractor implements IGetProfileInteractor {
   private repository: IUserRepository;
   constructor(

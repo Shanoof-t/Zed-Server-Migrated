@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { contaniner } from "./profile.container";
+import { container } from "./profile.container";
 import { INTERFACE_TYPE } from "../../../../shared/utils/appConst";
 import { ProfileController } from "../../controllers/ProfileController";
 import { catchAsyncMethod } from "../../../../shared/utils/catchAsynMethod";
@@ -8,7 +8,7 @@ import upload from "../../middlewares/imageUploadingMiddleware";
 
 const router: Router = express.Router();
 
-const controller = contaniner.get<ProfileController>(
+const controller = container.get<ProfileController>(
   INTERFACE_TYPE.ProfileController
 );
 
