@@ -27,9 +27,9 @@ app.use("/api/boards", boardRouter);
 app.use("/api/lists", listRouter);
 app.use("/api/cards", cardRouter);
 
-initKafkaTopics()
-connectProducer()
-consumeProjectCreated()
+// initKafkaTopics()
+// connectProducer()
+// consumeProjectCreated()
 
 
 app.use(globalErrorHandler);

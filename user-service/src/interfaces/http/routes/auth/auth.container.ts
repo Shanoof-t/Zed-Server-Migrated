@@ -13,7 +13,7 @@ import { IGoogleService } from "../../../../domain/services/IGoogleService";
 import { IGithubService } from "../../../../domain/services/IGithubService";
 
 // Infrastructure
-import { UserRepository } from "../../../../infrasrtucture/implementations/UserRepository";
+import { UserRepository } from "../../../../infrasrtucture/repositories/UserRepository";
 import { BcryptEngine } from "../../../../infrasrtucture/crypto/BcryptEngine";
 import { IHasherEngine } from "../../../../infrasrtucture/crypto/IHasherEngine";
 import { TokenManger } from "../../../../infrasrtucture/security/token/tokenManager";

@@ -26,9 +26,9 @@ app.use(globalErrorHandler);
 const startServer = async () => {
   try {
     await connectDB();
-    await initKafkaTopics()
-    await createMessageConsumer();
-    await connectProducer()
+    // await initKafkaTopics()
+    // await createMessageConsumer();
+    // await connectProducer()
     const server = app.listen(PORT, () => {
       console.log("")
       console.log(" ██████╗██╗  ██╗ █████╗ ███╗   ██╗███╗   ██╗███████╗██╗         ███████╗███████╗██████╗ ██╗   ██╗██╗ ██████╗███████╗")

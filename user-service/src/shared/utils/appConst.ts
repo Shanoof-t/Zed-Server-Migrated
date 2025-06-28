@@ -22,4 +22,6 @@ export const INTERFACE_TYPE = {
   GetProfileInteractor: Symbol.for("GetProfileInteractor"),
   UpdateProfileInteractor: Symbol.for("UpdateProfileInteractor"),
   GetBulkUsersInteractor: Symbol.for("GetBulkUsersInteractor"),
+  UserProducer: Symbol.for("UserProducer"),
+  UserConsumersHandler: Symbol.for("UserConsumersHandler"),
 };

@@ -9,7 +9,7 @@ import { UpdateProfileInteractor } from "../../../../application/interactors/upd
 import { User } from "../../../../domain/entities/User";
 import UserModel from "../../../../infrasrtucture/database/model/userModel";
 import { IUserRepository } from "../../../../domain/repositories/IUserRepository";
-import { UserRepository } from "../../../../infrasrtucture/implementations/UserRepository";
+import { UserRepository } from "../../../../infrasrtucture/repositories/UserRepository"; 
 
 export const container = new Container();
 

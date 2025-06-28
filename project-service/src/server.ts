@@ -18,7 +18,7 @@ const PORT = config.SERVER_PORT || 5002
 
 connectDB()
 
-initKafkaTopics().then(() => { connectProducer() })
+// initKafkaTopics().then(() => { connectProducer() })
 
 app.use(express.json());
 app.use(cookieParser());

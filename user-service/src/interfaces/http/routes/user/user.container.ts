@@ -2,7 +2,7 @@ import { Container } from "inversify";
 import { INTERFACE_TYPE } from "../../../../shared/utils/appConst";
 import { UserController } from "../../controllers/UserController";
 import { GetBulkUsersInteractor } from "../../../../application/interactors/GetBulkUsersInteractor";
-import { UserRepository } from "../../../../infrasrtucture/implementations/UserRepository";
+import { UserRepository } from "../../../../infrasrtucture/repositories/UserRepository"; 
 import { Model } from "mongoose";
 import { User } from "../../../../domain/entities/User";
 import UserModel from "../../../../infrasrtucture/database/model/userModel";
