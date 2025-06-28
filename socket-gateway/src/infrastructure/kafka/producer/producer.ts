@@ -1,5 +1,5 @@
 import { ICreateCard, ISendMessageInfo } from "zedspace-shared-types";
-import kafka from "../configs/kafka";
+import kafka from "../kafka";
 
 const producer = kafka.producer();
 
@@ -13,7 +13,6 @@ export const connectProducer = async () => {
 
 export const sendMessageProducer = async (data: ISendMessageInfo) => {
   try {
-
     await producer.send({
       topic: "send_message",
       messages: [{ key: data.channelId, value: JSON.stringify(data) }],
